@@ -1,36 +1,22 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { DataTable } from "@/components/data-table";
-import { SectionCards } from "@/components/section-cards";
-import { SiteHeader } from "@/components/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { headers } from "next/headers"
+import { ReactNode } from "react"
+import AdminClients from "./clients/page"
+import AdminDashboard from "./(components)/admin-dashboard"
 
-import data from "./data.json";
+const routeViews: Record<string, ReactNode> = {
+  "/dashboard/clients": <AdminClients />,
+  "/dashboard": <AdminDashboard />,
+  "/analytics": <div>Analytics View</div>,
+  "/projects": <div>Projects View</div>,
+}
 
-export default function Page() {
-  return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <SiteHeader />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <div className="px-4 lg:px-6">
-                <ChartAreaInteractive />
-              </div>
-              <DataTable data={data} />
-            </div>
-          </div>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
-  );
+export default async function Page() {
+  const pathname = (await headers()).get("x-next-url") || "/dashboard"
+
+  const content =
+    Object.entries(routeViews)
+      .sort((a, b) => b[0].length - a[0].length) 
+      .find(([path]) => pathname === path)?.[1] ?? routeViews["/dashboard"]
+
+  return <>{content}</>
 }

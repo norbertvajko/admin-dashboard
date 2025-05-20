@@ -41,29 +41,28 @@ const data = {
   },
   navMain: [
     {
+      key: "dashboard",
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
-      url: "#",
+      key: "clients",
+      title: "Clients",
+      url: "/dashboard/clients",
       icon: IconListDetails,
     },
     {
+      key: "analytics",
       title: "Analytics",
-      url: "#",
+      url: "/analytics",
       icon: IconChartBar,
     },
     {
+      key: "projects",
       title: "Projects",
-      url: "#",
+      url: "/projects",
       icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
     },
   ],
   navClouds: [
@@ -163,7 +162,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
                 <span className="text-base font-semibold">
-                  Orcish Dashboard
+                  Admin Dashboard
                 </span>
               </a>
             </SidebarMenuButton>

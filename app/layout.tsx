@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ActiveThemeProvider } from "@/components/active-theme";
 import { cookies } from "next/headers";
 import { cn } from "@/lib/utils";
+import CookieConsent from "@/components/gpdr-consent-banner";
 
 const META_THEME_COLORS = {
   light: "#ffffff",
@@ -53,6 +54,7 @@ export default async function RootLayout({
         >
           <ActiveThemeProvider initialTheme={activeThemeValue}>
             {children}
+            <CookieConsent variant="default" />
           </ActiveThemeProvider>
         </ThemeProvider>
       </body>
