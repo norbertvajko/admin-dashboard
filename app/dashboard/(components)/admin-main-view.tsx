@@ -1,3 +1,5 @@
+"use client";
+
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { DataTable } from "@/components/data-table";
 import { SectionCards } from "@/components/section-cards";
@@ -13,7 +15,7 @@ const metrics: CardMetric[] = [
     trend: "up",
     trendValue: "12.5%",
     description: "Trending up this month",
-    subtext: "Visitors for the last 6 months"
+    subtext: "Visitors for the last 6 months",
   },
   {
     title: "Clients",
@@ -21,7 +23,7 @@ const metrics: CardMetric[] = [
     trend: "down",
     trendValue: "20%",
     description: "Down 20% this period",
-    subtext: "Acquisition needs attention"
+    subtext: "Acquisition needs attention",
   },
   {
     title: "Active clients",
@@ -29,7 +31,7 @@ const metrics: CardMetric[] = [
     trend: "up",
     trendValue: "12.5%",
     description: "Strong user retention",
-    subtext: "Engagement exceed targets"
+    subtext: "Engagement exceed targets",
   },
   {
     title: "Growth Rate",
@@ -37,11 +39,11 @@ const metrics: CardMetric[] = [
     trend: "up",
     trendValue: "4.5%",
     description: "Steady performance increase",
-    subtext: "Meets growth projections"
-  }
+    subtext: "Meets growth projections",
+  },
 ];
 
-const AdminDashboard = () => {
+const AdminMainView = () => {
   return (
     <>
       <SectionCards metrics={metrics} />
@@ -53,4 +55,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default AdminMainView;

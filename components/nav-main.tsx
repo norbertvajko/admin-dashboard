@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
+import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { useActivePath } from "@/hooks/use-active-path"
-import Link from "next/link"
+} from "@/components/ui/sidebar";
+import { useActivePath } from "@/hooks/use-active-path";
+import Link from "next/link";
 
-type NavItem = {
-  key: string
-  title: string
-  url: string
-  icon?: Icon
-}
+export type NavItem = {
+  key: string;
+  title: string;
+  url: string;
+  icon?: Icon;
+};
 
 export function NavMain({ items }: { items: NavItem[] }) {
-  const { isActive } = useActivePath()
+  const { isActive } = useActivePath();
 
   return (
     <SidebarGroup>
@@ -62,5 +62,5 @@ export function NavMain({ items }: { items: NavItem[] }) {
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
+  );
 }

@@ -3,7 +3,6 @@
 import * as React from "react";
 import {
   IconCamera,
-  IconChartBar,
   IconDashboard,
   IconDatabase,
   IconFileAi,
@@ -12,11 +11,11 @@ import {
   IconFolder,
   IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
   IconReport,
   IconSearch,
   IconSettings,
   IconUsers,
+  IconClipboardList,
 } from "@tabler/icons-react";
 
 import { NavDocuments } from "@/components/nav-documents";
@@ -32,13 +31,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuth } from "./providers/auth-providers";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       key: "dashboard",
@@ -50,19 +45,13 @@ const data = {
       key: "clients",
       title: "Clients",
       url: "/dashboard/clients",
-      icon: IconListDetails,
+      icon: IconUsers,
     },
     {
-      key: "analytics",
-      title: "Analytics",
-      url: "/analytics",
-      icon: IconChartBar,
-    },
-    {
-      key: "projects",
-      title: "Projects",
-      url: "/projects",
-      icon: IconFolder,
+      key: "products",
+      title: "Products",
+      url: "/dashboard/products",
+      icon: IconClipboardList,
     },
   ],
   navClouds: [
@@ -150,6 +139,16 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth();
+
+  const userData = {
+    name: `${user?.firstName ?? "Guest"}${
+      user?.lastName ? ` ${user.lastName}` : ""
+    }`,
+    email: user?.emailAddresses?.[0]?.emailAddress ?? "",
+    avatar: user?.imageUrl ?? "",
+  };
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -161,9 +160,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">
-                  Admin Dashboard
-                </span>
+                <span className="text-base font-semibold">Admin Dashboard</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -171,11 +168,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        {/* <NavDocuments items={data.documents} /> */}
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData} />
       </SidebarFooter>
     </Sidebar>
   );

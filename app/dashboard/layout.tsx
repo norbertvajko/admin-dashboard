@@ -1,33 +1,41 @@
-'use client';
+import { ReactNode } from "react";
+import type { Metadata } from "next";
+import { DashboardComponent } from "./(components)/dahsboard-component";
 
-import { ReactNode } from "react"
-import { AppSidebar } from "@/components/app-sidebar"
-import { SiteHeader } from "@/components/site-header"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+export const metadata: Metadata = {
+  title: "Dashboard | YourAppName",
+  description:
+    "Access your personal dashboard, manage settings, and monitor your activity.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "Dashboard | YourAppName",
+    description: "Your personalized dashboard on YourAppName.",
+    url: "https://yourapp.com/dashboard",
+    siteName: "YourAppName",
+    images: [
+      {
+        url: "https://yourapp.com/images/dashboard-preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Dashboard Preview",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dashboard | YourAppName",
+    description: "Your personalized dashboard on YourAppName.",
+    images: ["https://yourapp.com/images/dashboard-preview.png"],
+  },
+};
 
 type DashboardLayoutProps = {
-    children: ReactNode
-}
+  children: ReactNode;
+};
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
-    return (
-        <SidebarProvider
-            style={
-                {
-                    "--sidebar-width": "calc(var(--spacing) * 72)",
-                    "--header-height": "calc(var(--spacing) * 12)",
-                } as React.CSSProperties
-            }
-        >
-            <AppSidebar variant="inset" />
-            <SidebarInset>
-                <SiteHeader />
-                <main className="flex flex-1 flex-col">
-                    <div className="@container/main flex flex-1 flex-col gap-4 py-6">
-                        {children}
-                    </div>
-                </main>
-            </SidebarInset>
-        </SidebarProvider>
-    )
+export default function DashboardLayout(props: DashboardLayoutProps) {
+  const { children } = props;
+
+  return <DashboardComponent>{children}</DashboardComponent>;
 }

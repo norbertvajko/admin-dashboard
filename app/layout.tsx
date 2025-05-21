@@ -6,21 +6,7 @@ import { ActiveThemeProvider } from "@/components/active-theme";
 import { cookies } from "next/headers";
 import { cn } from "@/lib/utils";
 import CookieConsent from "@/components/gpdr-consent-banner";
-
-const META_THEME_COLORS = {
-  light: "#ffffff",
-  dark: "#09090b",
-};
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { Providers } from "@/components/providers/providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -45,18 +31,20 @@ export default async function RootLayout({
           isScaled ? "theme-scaled" : ""
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          enableColorScheme
-        >
-          <ActiveThemeProvider initialTheme={activeThemeValue}>
-            {children}
-            <CookieConsent variant="default" />
-          </ActiveThemeProvider>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            enableColorScheme
+          >
+            <ActiveThemeProvider initialTheme={activeThemeValue}>
+              {children}
+              <CookieConsent variant="default" />
+            </ActiveThemeProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
