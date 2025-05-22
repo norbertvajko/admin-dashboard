@@ -31,7 +31,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useAuth } from "./providers/auth-providers";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const data = {
   navMain: [
@@ -139,14 +139,14 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { user } = useAuth();
+  const { fullUser } = useCurrentUser();
 
   const userData = {
-    name: `${user?.firstName ?? "Guest"}${
-      user?.lastName ? ` ${user.lastName}` : ""
+    name: `${fullUser?.firstName ?? "Guest"}${
+      fullUser?.lastName ? ` ${fullUser.lastName}` : ""
     }`,
-    email: user?.emailAddresses?.[0]?.emailAddress ?? "",
-    avatar: user?.imageUrl ?? "",
+    email: fullUser?.email ?? "",
+    avatar: fullUser?.imageUrl ?? "",
   };
 
   return (

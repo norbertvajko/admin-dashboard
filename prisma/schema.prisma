@@ -16,4 +16,6 @@ model User {
   lastName  String?
   imageUrl  String?
   createdAt DateTime @default(now())
+  info      Json?
+  role      String   @default("USER")
 }

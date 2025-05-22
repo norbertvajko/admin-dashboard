@@ -1,20 +1,20 @@
-import { db } from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
+import type { User } from "@clerk/nextjs/server";
+import { db } from "./prisma";
 
-export const createUserIfNotExists = async () => {
-  const user = await currentUser();
-  if (!user) return;
+export async function createUserIfNotExists(user: User) {
+  if (!user) return null;
 
   const existing = await db.user.findUnique({ where: { clerkId: user.id } });
-  if (existing) return;
+  if (existing) return existing;
 
-  await db.user.create({
+  return await db.user.create({
     data: {
       clerkId: user.id,
       email: user.emailAddresses[0]?.emailAddress || "",
       firstName: user.firstName,
       lastName: user.lastName,
       imageUrl: user.imageUrl,
+      role: "USER",
     },
   });
-};
+}
