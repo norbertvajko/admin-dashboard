@@ -1,18 +1,17 @@
-// /app/api/users/[id]/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, context: { params: { id: string } }) {
+  const { params } = await context;
+  const { id } = params;
+
   try {
     const clerkUser = await currentUser();
 
     if (!clerkUser?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const { id } = params;
 
     if (id !== clerkUser.id) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
