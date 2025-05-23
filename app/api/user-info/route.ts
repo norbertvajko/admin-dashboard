@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
-import { createUserIfNotExists } from "@/lib/createUser";
+import { createUserIfNotExists } from "@/lib/actions/createUser";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {

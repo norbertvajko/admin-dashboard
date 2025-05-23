@@ -2,11 +2,11 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export type DashboardComponentProps = {
+export type DashboardWrapperProps = {
   children: React.ReactNode;
 };
 
-export const DashboardComponent = (props: DashboardComponentProps) => {
+export const DashboardWrapper = (props: DashboardWrapperProps) => {
   const { children } = props;
 
   return (

@@ -1,5 +1,5 @@
 import type { User } from "@clerk/nextjs/server";
-import { db } from "./prisma";
+import { db } from "../prisma";
 
 export async function createUserIfNotExists(user: User) {
   if (!user) return null;

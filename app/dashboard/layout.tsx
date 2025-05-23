@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { DashboardComponent } from "./(components)/dahsboard-component";
+import { DashboardWrapper } from "./(components)/dahsboard-wrapper";
 
 export const metadata: Metadata = {
   title: "Dashboard | YourAppName",
@@ -37,5 +37,5 @@ type DashboardLayoutProps = {
 export default function DashboardLayout(props: DashboardLayoutProps) {
   const { children } = props;
 
-  return <DashboardComponent>{children}</DashboardComponent>;
+  return <DashboardWrapper>{children}</DashboardWrapper>;
 }
