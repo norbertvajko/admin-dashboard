@@ -98,7 +98,7 @@ export function useCookieConsent({
       if (isSignedIn) {
         try {
           // Wrap updatedInfo inside { userInfo: ... } before sending
-          await fetch('/api/user-info', {
+          await fetch('/api/update-user-info', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userInfo: updatedInfo }),
@@ -125,7 +125,7 @@ useEffect(() => {
 
   const syncConsent = async () => {
     try {
-      await fetch('/api/user-info', {
+      await fetch('/api/update-user-info', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: storedInfoRaw,
