@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { CookieIcon } from "lucide-react";
@@ -12,12 +12,7 @@ export default function CookieConsent({
   onAcceptCallback = () => {},
   onDeclineCallback = () => {},
 }) {
-  const {
-    isOpen,
-    hide,
-    accept,
-    decline,
-  } = useCookieConsent({
+  const { isOpen, hide, accept, decline } = useCookieConsent({
     demo,
     onAcceptCallback,
     onDeclineCallback,
@@ -30,7 +25,7 @@ export default function CookieConsent({
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
-  const handleOutsideClick = (e: any) => {
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setFlashBorder(true);
     setTimeout(() => setFlashBorder(false), 1000);
@@ -61,46 +56,76 @@ export default function CookieConsent({
         />
       )}
 
-      <div className={wrapperClass} role="dialog" aria-modal="true" aria-labelledby="cookie-consent-title">
+      <div
+        className={wrapperClass}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cookie-consent-title"
+      >
         <div className={cardBaseClass}>
           {variant !== "small" ? (
             <div className="grid gap-2">
               <div className="border-b border-border h-14 flex items-center justify-between p-4">
-                <h1 id="cookie-consent-title" className="text-lg font-medium">We use cookies</h1>
+                <h1 id="cookie-consent-title" className="text-lg font-medium">
+                  We use cookies
+                </h1>
                 <CookieIcon className="h-[1.2rem] w-[1.2rem]" />
               </div>
               <div className="p-4">
                 <p className="text-sm font-normal text-start">
-                  We use cookies to ensure you get the best experience on our website. For more
-                  information on how we use cookies, please see our cookie policy.
-                  <br /><br />
+                  We use cookies to ensure you get the best experience on our
+                  website. For more information on how we use cookies, please
+                  see our cookie policy.
+                  <br />
+                  <br />
                   <span className="text-xs">
-                    By clicking "<span className="font-medium opacity-80">Accept</span>", you agree to our use of cookies.
+                    By clicking <q>Accept</q>, you agree to our use of cookies.
                   </span>
                   <br />
-                  <a href="#" className="text-xs underline">Learn more.</a>
+                  <a href="#" className="text-xs underline">
+                    Learn more.
+                  </a>
                 </p>
               </div>
               <div className="flex flex-col gap-2 p-4 py-5 border-t border-border dark:bg-background/20">
-                <Button onClick={accept} className="w-full">Accept</Button>
-                <Button onClick={decline} className="w-full" variant="secondary">Decline</Button>
+                <Button onClick={accept} className="w-full">
+                  Accept
+                </Button>
+                <Button
+                  onClick={decline}
+                  className="w-full"
+                  variant="secondary"
+                >
+                  Decline
+                </Button>
               </div>
             </div>
           ) : (
             <>
               <div className="flex items-center justify-between p-3">
-                <h1 id="cookie-consent-title" className="text-lg font-medium">We use cookies</h1>
+                <h1 id="cookie-consent-title" className="text-lg font-medium">
+                  We use cookies
+                </h1>
                 <CookieIcon className="h-[1.2rem] w-[1.2rem]" />
               </div>
               <div className="p-3 -mt-2">
                 <p className="text-sm text-left text-muted-foreground">
-                  We use cookies to ensure you get the best experience on our website.
-                  For more information on how we use cookies, please see our cookie policy.
+                  We use cookies to ensure you get the best experience on our
+                  website. For more information on how we use cookies, please
+                  see our cookie policy.
                 </p>
               </div>
               <div className="p-3 flex flex-col items-center gap-2 mt-2 border-t">
-                <Button onClick={accept} className="w-full h-9 rounded-full">Accept</Button>
-                <Button onClick={decline} className="w-full h-9 rounded-full" variant="outline">Decline</Button>
+                <Button onClick={accept} className="w-full h-9 rounded-full">
+                  Accept
+                </Button>
+                <Button
+                  onClick={decline}
+                  className="w-full h-9 rounded-full"
+                  variant="outline"
+                >
+                  Decline
+                </Button>
               </div>
             </>
           )}

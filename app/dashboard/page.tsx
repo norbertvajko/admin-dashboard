@@ -10,6 +10,7 @@ const AdminMainView = dynamic(() => import("./(components)/admin-main-view/admin
 
 export default async function DashboardPage() {
   const user = await currentUser();
+  
   if (user) {
     await createUserIfNotExists(user);
   }
